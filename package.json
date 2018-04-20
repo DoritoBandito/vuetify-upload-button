@@ -1,6 +1,6 @@
 {
   "name": "vuetify-upload-button",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Vue.js component for showing a Vuetify input/button for file uploading.",
   "main": "dist/upload-btn.js",
   "scripts": {
