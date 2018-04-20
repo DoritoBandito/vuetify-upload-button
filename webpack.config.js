@@ -40,17 +40,17 @@ module.exports = [
   merge(config, {
     entry: path.resolve(__dirname + '/src/plugin.js'),
     output: {
-      filename: 'upload-button.min.js',
+      filename: 'vuetify-upload-button.min.js',
       libraryTarget: 'window',
-      library: 'UploadButton',
+      library: 'VuetifyUploadButton',
     }
   }),
   merge(config, {
     entry: path.resolve(__dirname + '/src/UploadButton.vue'),
     output: {
-      filename: 'upload-button.js',
+      filename: 'vuetify-upload-button.js',
       libraryTarget: 'umd',
-      library: 'upload-button',
+      library: 'vuetify-upload-button',
       umdNamedDefine: true
     }
   })
