@@ -25,15 +25,13 @@ Include the script file, then install the component with `Vue.use(UploadButton);
 ### Module
 
 ```js
-import UploadButton from 'vuetify-upload-button';
+  import UploadButton from 'vuetify-upload-button';
 
-<script>
   return default {
     components: {
       'upload-btn': UploadButton
     }
   }
-</script>
 ```
 
 ## Usage
