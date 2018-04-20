@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/doritobandito/vuetify-upload-button "
+    "url": "git+https://github.com/doritobandito/vuetify-upload-button"
   },
   "keywords": [
     "vue",
@@ -33,9 +33,7 @@
     "vue-style-loader": "^2.0.3",
     "vue-template-compiler": "^2.2.1",
     "webpack": "1.13.1",
-    "webpack-merge": "^4.1.0"
-  },
-  "dependencies": {
+    "webpack-merge": "^4.1.0",
     "css-loader": "^0.28.11"
   }
 }
