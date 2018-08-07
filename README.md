@@ -38,8 +38,27 @@ Include the script file, then install the component with `Vue.use(UploadButton);
 
 Once installed, it can be used in a template as simply as:
 
+Simple Upload button
 ```html
 <upload-btn></upload-btn>
+```
+
+Button with icon
+```html
+<upload-btn>
+  <template slot="icon">
+    <v-icon>add</v-icon>
+  </template>
+</upload-btn>
+```
+
+Button as icon
+```html
+<upload-btn icon>
+  <template slot="icon">
+    <v-icon>add</v-icon>
+  </template>
+</upload-btn>
 ```
 
 ## Props
