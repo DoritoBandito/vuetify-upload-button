@@ -11,7 +11,7 @@
     <label 
       for="uploadFile"
       v-ripple="ripple"
-      :class="`btn ${classes}${color} upload-btn`"
+      :class="`v-btn ${classes}${color} upload-btn`"
     >
       {{ icon ? '' : title }}
       <slot name="icon"></slot>
@@ -83,16 +83,16 @@
     computed: {
       classes () {
         const classes = {
-          'btn--block': this.block,
-          'btn--flat': this.flat,
+          'v-btn--block': this.block,
+          'v-btn--flat': this.flat,
           'upload-btn-hover': this.hover,
-          'btn--icon': this.icon,
-          'btn--large': this.large,
-          'btn--loading': this.loading,
-          'btn--outline': this.outline,
-          'btn--round': this.round,
-          'btn--small': this.small,
-          'btn--disabled': this.disabled
+          'v-btn--icon': this.icon,
+          'v-btn--large': this.large,
+          'v-btn--loading': this.loading,
+          'v-btn--outline': this.outline,
+          'v-btn--round': this.round,
+          'v-btn--small': this.small,
+          'v-btn--disabled': this.disabled
         }
 
         let classString = "";
