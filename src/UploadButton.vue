@@ -5,7 +5,8 @@
     <input
       id="uploadFile"
       type="file"
-      name="uploadFile"
+      :name="name"
+      :accept="accept"
       v-on:change="fileChanged"
     />
     <label 
@@ -23,6 +24,10 @@
   export default {
     name: 'upload-btn',
     props: {
+      accept: {
+        default: '*',
+        type: String
+      },
       block: {
         default: false,
         type: Boolean
@@ -58,6 +63,10 @@
       loading: {
         default: false,
         type: Boolean
+      },
+      name: {
+        default: 'uploadFile',
+        type: String
       },
       outline: {
         default: false,
