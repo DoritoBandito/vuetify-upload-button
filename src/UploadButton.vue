@@ -5,7 +5,7 @@
     <input
       id="uploadFile"
       type="file"
-      name="uploadFile"
+      :name="name"
       v-on:change="fileChanged"
     />
     <label 
@@ -58,6 +58,10 @@
       loading: {
         default: false,
         type: Boolean
+      },
+      name: {
+        default: 'uploadFile',
+        type: String
       },
       outline: {
         default: false,
