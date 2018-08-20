@@ -67,6 +67,7 @@ You can use the following props
 
 | Name          | Description   | Type  | Default |
 | ------------- |---------------| -----:| -----:|
+| accept        | HTML input accept attribute | string | * |
 | block         | block         | bool  | false |
 | fileChangedCallback | callback for when a file is selected, returns a File object | function | undefined |
 | color | vuetify color, e.g. 'primary' | string | 'primary' |
@@ -76,6 +77,7 @@ You can use the following props
 | icon | button is icon button | bool | false |
 | large | button is large | bool | false |
 | loading | loading state for button | bool | false |
+| name | applies HTML name attribute | string | uploadFile |
 | outline | button is outline | bool | false |
 | ripple | button has ripple effect | bool | true |
 | round | button is round | bool | false |
