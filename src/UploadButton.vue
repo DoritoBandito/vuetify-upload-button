@@ -3,17 +3,19 @@
     class="upload-btn"
   > 
     <input
-      id="uploadFile"
+      :id="id"
       type="file"
       :name="name"
       :accept="accept"
       v-on:change="fileChanged"
+      :multiple="multiple"
     />
     <label 
-      for="uploadFile"
+      :for="id"
       v-ripple="ripple"
       :class="`v-btn ${classes}${color} upload-btn`"
     >
+      <slot name="icon-left"></slot>
       {{ icon ? '' : title }}
       <slot name="icon"></slot>
     </label>
@@ -29,6 +31,10 @@
         type: String
       },
       block: {
+        default: false,
+        type: Boolean
+      },
+      depressed: {
         default: false,
         type: Boolean
       },
@@ -64,6 +70,10 @@
         default: false,
         type: Boolean
       },
+      multiple: {
+        default: false,
+        type: Boolean
+      },
       name: {
         default: 'uploadFile',
         type: String
@@ -87,9 +97,16 @@
       title: {
         default: 'Upload',
         type: String
+      },
+      uniqueId: {
+        default: false,
+        type: Boolean
       }
     },
     computed: {
+      id () {
+        return this.uniqueId ? `${this._uid}uploadFile` : 'uploadFile'
+      },
       classes () {
         const classes = {
           'v-btn--block': this.block,
@@ -101,7 +118,8 @@
           'v-btn--outline': this.outline,
           'v-btn--round': this.round,
           'v-btn--small': this.small,
-          'v-btn--disabled': this.disabled
+          'v-btn--disabled': this.disabled,
+          'v-btn--depressed': this.depressed
         }
 
         let classString = "";
@@ -117,8 +135,14 @@
       fileChanged (e) {
         if (e) {
           if (this.fileChangedCallback) {
-            if (e.target.files[0]) {
-              this.fileChangedCallback(e.target.files[0]);
+            if (e.target.files) {
+              if (!this.multiple && e.target.files[0]) {
+                this.fileChangedCallback(e.target.files[0]);
+              } else if (this.multiple) {
+                this.fileChangedCallback(e.target.files);
+              } else {
+                this.fileChangedCallback(null);
+              }
             } else {
               this.fileChangedCallback(null);
             }
