@@ -8,6 +8,7 @@
       :name="name"
       :accept="accept"
       v-on:change="fileChanged"
+      :multiple="multiple"
     />
     <label 
       :for="id"
@@ -29,6 +30,10 @@
         type: String
       },
       block: {
+        default: false,
+        type: Boolean
+      },
+      depressed: {
         default: false,
         type: Boolean
       },
@@ -61,6 +66,10 @@
         type: Boolean
       },
       loading: {
+        default: false,
+        type: Boolean
+      },
+      multiple: {
         default: false,
         type: Boolean
       },
@@ -108,7 +117,8 @@
           'v-btn--outline': this.outline,
           'v-btn--round': this.round,
           'v-btn--small': this.small,
-          'v-btn--disabled': this.disabled
+          'v-btn--disabled': this.disabled,
+          'v-btn--depressed': this.depressed
         }
 
         let classString = "";
@@ -124,8 +134,14 @@
       fileChanged (e) {
         if (e) {
           if (this.fileChangedCallback) {
-            if (e.target.files[0]) {
-              this.fileChangedCallback(e.target.files[0]);
+            if (e.target.files) {
+              if (!this.multiple && e.target.files[0]) {
+                this.fileChangedCallback(e.target.files[0]);
+              } else if (this.multiple) {
+                this.fileChangedCallback(e.target.files);
+              } else {
+                this.fileChangedCallback(null);
+              }
             } else {
               this.fileChangedCallback(null);
             }
