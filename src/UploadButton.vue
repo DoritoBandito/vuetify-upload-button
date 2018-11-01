@@ -15,6 +15,7 @@
       v-ripple="ripple"
       :class="`v-btn ${classes}${color} upload-btn`"
     >
+      <slot name="icon-left"></slot>
       {{ icon ? '' : title }}
       <slot name="icon"></slot>
     </label>
@@ -98,7 +99,7 @@
         type: String
       },
       uniqueId: {
-        default: true,
+        default: false,
         type: Boolean
       }
     },
