@@ -69,6 +69,7 @@ You can use the following props
 | ------------- |---------------| -----:| -----:|
 | accept        | HTML input accept attribute | string | * |
 | block         | block         | bool  | false |
+| depressed     | remove box shadow | bool | false |
 | fileChangedCallback | callback for when a file is selected, returns a File object | function | undefined |
 | color | vuetify color, e.g. 'primary' | string | 'primary' |
 | disabled | sets disabled property for input/button | bool | false |
@@ -77,10 +78,12 @@ You can use the following props
 | icon | button is icon button | bool | false |
 | large | button is large | bool | false |
 | loading | loading state for button | bool | false |
+| multiple | allows multiple files to be uploaded, returns an array instead of single object | bool | false |
 | name | applies HTML name attribute | string | uploadFile |
 | outline | button is outline | bool | false |
 | ripple | button has ripple effect | bool | true |
 | round | button is round | bool | false |
 | small | button is small | bool | false |
 | title | text of button | string | 'Upload' |
+| uniqueId | use a unique id for the button for re-usability on same page | bool | true |
 
