@@ -3,14 +3,14 @@
     class="upload-btn"
   > 
     <input
-      id="uploadFile"
+      :id="id"
       type="file"
       :name="name"
       :accept="accept"
       v-on:change="fileChanged"
     />
     <label 
-      for="uploadFile"
+      :for="id"
       v-ripple="ripple"
       :class="`v-btn ${classes}${color} upload-btn`"
     >
@@ -87,9 +87,16 @@
       title: {
         default: 'Upload',
         type: String
+      },
+      uniqueId: {
+        default: true,
+        type: Boolean
       }
     },
     computed: {
+      id () {
+        return this.uniqueId ? `${this._uid}uploadFile` : 'uploadFile'
+      },
       classes () {
         const classes = {
           'v-btn--block': this.block,
