@@ -11,7 +11,7 @@
       :multiple="multiple"
     />
     <v-card
-    ripple>
+    :ripple="ripple">
       <label
         :for="id"
         :class="`v-btn ${classes}${color} upload-btn`"
