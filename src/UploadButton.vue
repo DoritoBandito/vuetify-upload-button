@@ -10,15 +10,17 @@
       v-on:change="fileChanged"
       :multiple="multiple"
     />
-    <label 
-      :for="id"
-      v-ripple="ripple"
-      :class="`v-btn ${classes}${color} upload-btn`"
-    >
-      <slot name="icon-left"></slot>
-      {{ icon ? '' : title }}
-      <slot name="icon"></slot>
-    </label>
+    <v-card
+    ripple>
+      <label
+        :for="id"
+        :class="`v-btn ${classes}${color} upload-btn`"
+      >
+        <slot name="icon-left"></slot>
+        {{ icon ? '' : title }}
+        <slot name="icon"></slot>
+      </label>
+    </v-card>
   </div>
 </template>
 
