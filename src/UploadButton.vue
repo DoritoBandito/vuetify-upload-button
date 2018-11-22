@@ -10,9 +10,21 @@
       v-on:change="fileChanged"
       :multiple="multiple"
     />
-    <label 
+    <label
+      v-if="ripple"
+      :id="`label${id}`"
       :for="id"
-      v-ripple="ripple"
+      :class="`v-btn ${classes}${color} upload-btn`"
+      v-ripple
+    >
+      <slot name="icon-left"></slot>
+      {{ icon ? '' : title }}
+      <slot name="icon"></slot>
+    </label>
+    <label
+      v-else
+      :id="`label${id}`"
+      :for="id"
       :class="`v-btn ${classes}${color} upload-btn`"
     >
       <slot name="icon-left"></slot>
