@@ -127,14 +127,17 @@
           'v-btn--icon': this.icon,
           'v-btn--large': this.large,
           'v-btn--loading': this.loading,
-          'v-btn--outline': this.outline,
+          'v-btn--outline v-btn--depressed': this.outline,
           'v-btn--round': this.round,
           'v-btn--small': this.small,
           'v-btn--disabled': this.disabled,
           'v-btn--depressed': this.depressed
         }
 
-        let classString = "";
+        if (this.flat)
+          this.color = ''
+
+        let classString = ''
         for (let key in classes) {
           if (classes[key]) {
             classString += `${key} `
