@@ -34,6 +34,24 @@ Include the script file, then install the component with `Vue.use(UploadButton);
   }
 ```
 
+### IMPORTANT NOTE
+
+In order for the ripple directive to work properly, you must [import the Ripple directive](https://vuetifyjs.com/en/framework/a-la-carte).
+
+```js
+// plugins/vuetify.js
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
+import { Ripple } from 'vuetify/lib/directives'
+
+Vue.use(Vuetify, {
+  // other stuff
+  directives: {
+    Ripple
+  }
+})
+```
+
 ## Usage
 
 Once installed, it can be used in a template as simply as:
