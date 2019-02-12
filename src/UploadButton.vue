@@ -154,7 +154,7 @@
     methods: {
       fileChanged (e) {
         if (e) {
-          this.$emit('filechanged', e.target.files[0]);
+          this.$emit('filechanged', e.target.files);
           if (this.fileChangedCallback) {
             if (e.target.files) {
               if (!this.multiple && e.target.files[0]) {
