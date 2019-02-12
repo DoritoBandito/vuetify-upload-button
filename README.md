@@ -128,6 +128,7 @@ You can use the following props
 | accept        | HTML input accept attribute | string | * |
 | block         | block         | bool  | false |
 | depressed     | remove box shadow | bool | false |
+| directories | allow directories | bool | false |
 | fileChangedCallback | callback for when a file is selected, returns a File object | function | undefined |
 | color | vuetify color, e.g. 'primary' | string | 'primary' |
 | disabled | sets disabled property for input/button | bool | false |
@@ -145,3 +146,6 @@ You can use the following props
 | title | text of button | string | 'Upload' |
 | uniqueId | use a unique id for the button for re-usability on same page | bool | false |
 
+# Events
+
+filechanged: Returns the files array when changed.

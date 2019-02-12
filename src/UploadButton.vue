@@ -9,6 +9,7 @@
       :accept="accept"
       v-on:change="fileChanged"
       :multiple="multiple"
+      :webkitdirectory="directories"
     />
     <label
       v-if="ripple"
@@ -47,6 +48,10 @@
         type: Boolean
       },
       depressed: {
+        default: false,
+        type: Boolean
+      },
+      directories: {
         default: false,
         type: Boolean
       },
@@ -149,6 +154,7 @@
     methods: {
       fileChanged (e) {
         if (e) {
+          this.$emit('filechanged', e.target.files);
           if (this.fileChangedCallback) {
             if (e.target.files) {
               if (!this.multiple && e.target.files[0]) {
