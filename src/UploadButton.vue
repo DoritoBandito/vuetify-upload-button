@@ -10,11 +10,11 @@
       :multiple="multiple"
       @change="fileChanged"
     >
-    <label 
+    <label
       :id="`label${_uid + 'uploadFile'}`"
       v-ripple="ripple"
       :for="`${_uid}uploadFile`"
-      :class="`v-btn ${classes}${color} ${labelClass} upload-btn`" 
+      :class="`v-btn ${classes}${color} ${labelClass} upload-btn`"
       :style="{ maxWidth, width: fixedWidth || 'auto' }"
     >
       <div class="v-btn__content" style="max-width: 100%">
@@ -27,7 +27,6 @@
     </label>
   </div>
 </template>
-
 <script>
 export default {
   name: 'UploadBtn',
@@ -171,6 +170,11 @@ export default {
           this.$emit('fileUpdate')
         }
       }
+    },
+    clear() {
+      document.getElementById(`${this._uid}uploadFile`).value = ''
+      this.$emit('fileUpdate')
+      this.uTitle = 'Upload'
     }
   }
 }
