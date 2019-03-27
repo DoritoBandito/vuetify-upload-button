@@ -155,7 +155,7 @@ export default {
         if (e.target.files.length > 0) {
           if (!this.multiple) {
             this.uTitle = e.target.files[0].name
-            this.$emit('fileUpdate', e.target.files[0])
+            this.$emit('file-update', e.target.files[0])
           } else {
             let title = ''
             for (let i = 0; i < e.target.files.length; i++) {
@@ -163,17 +163,17 @@ export default {
             }
             title = title.slice(0, title.length - 2)
             this.uTitle = title
-            this.$emit('fileUpdate', e.target.files)
+            this.$emit('file-update', e.target.files)
           }
         } else {
           this.uTitle = 'Upload'
-          this.$emit('fileUpdate')
+          this.$emit('file-update')
         }
       }
     },
     clear() {
       document.getElementById(`${this._uid}uploadFile`).value = ''
-      this.$emit('fileUpdate')
+      this.$emit('file-update')
       this.uTitle = 'Upload'
     }
   }
