@@ -3,17 +3,19 @@
     class="upload-btn"
   >
     <input
-      :id="id"
+      :id="`${_uid}uploadFile`"
       type="file"
       :name="name"
       :accept="accept"
       :multiple="multiple"
       @change="fileChanged"
     >
-    <label :id="`label${id}`" v-ripple="ripple" :for="id" :class="`v-btn ${classes}${color} ${labelClass} upload-btn`">
-      <div class="v-btn__content">
+    <label :id="`label${_uid + 'uploadFile'}`" v-ripple="ripple" :for="`${_uid}uploadFile`" :class="`v-btn ${classes}${color} ${labelClass} upload-btn`" :style="{ maxWidth }">
+      <div class="v-btn__content" style="max-width: 100%">
         <slot name="icon-left" />
-        {{ icon ? '' : title }}
+        <span>
+          {{ icon ? '' : noTitleUpdate ? title : uTitle }}
+        </span>
         <slot name="icon" />
       </div>
     </label>
@@ -68,6 +70,10 @@ export default {
       default: false,
       type: Boolean
     },
+    maxWidth: {
+      default: '100%',
+      type: String
+    },
     multiple: {
       default: false,
       type: Boolean
@@ -96,15 +102,17 @@ export default {
       default: 'Upload',
       type: String
     },
-    uniqueId: {
+    noTitleUpdate: {
       default: false,
       type: Boolean
     }
   },
+  data() {
+    return {
+      uTitle: 'Upload'
+    }
+  },
   computed: {
-    id() {
-      return this.uniqueId ? `${this._uid}uploadFile` : 'uploadFile'
-    },
     classes() {
       const classes = {
         'v-btn--block': this.block,
@@ -135,15 +143,21 @@ export default {
   methods: {
     fileChanged(e) {
       if (e) {
-        if (e.target.files) {
-          if (!this.multiple && e.target.files[0]) {
+        if (e.target.files.length > 0) {
+          if (!this.multiple) {
+            this.uTitle = e.target.files[0].name
             this.$emit('fileUpdate', e.target.files[0])
-          } else if (this.multiple) {
-            this.$emit('fileUpdate', e.target.files)
           } else {
-            this.$emit('fileUpdate')
+            let title = ''
+            for (let i = 0; i < e.target.files.length; i++) {
+              title += e.target.files[i].name + ', '
+            }
+            title = title.slice(0, title.length - 2)
+            this.uTitle = title
+            this.$emit('fileUpdate', e.target.files)
           }
         } else {
+          this.uTitle = 'Upload'
           this.$emit('fileUpdate')
         }
       }
@@ -165,6 +179,12 @@ export default {
   overflow: hidden;
   opacity: 0;
   z-index: -1;
+}
+
+.upload-btn > .v-btn__content > span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .upload-btn-hover {
