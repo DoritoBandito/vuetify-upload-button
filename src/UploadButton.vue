@@ -10,7 +10,13 @@
       :multiple="multiple"
       @change="fileChanged"
     >
-    <label :id="`label${_uid + 'uploadFile'}`" v-ripple="ripple" :for="`${_uid}uploadFile`" :class="`v-btn ${classes}${color} ${labelClass} upload-btn`" :style="{ maxWidth }">
+    <label 
+      :id="`label${_uid + 'uploadFile'}`"
+      v-ripple="ripple"
+      :for="`${_uid}uploadFile`"
+      :class="`v-btn ${classes}${color} ${labelClass} upload-btn`" 
+      :style="{ maxWidth, width: fixedWidth || 'auto' }"
+    >
       <div class="v-btn__content" style="max-width: 100%">
         <slot name="icon-left" />
         <span>
@@ -45,6 +51,10 @@ export default {
     disabled: {
       default: false,
       type: Boolean
+    },
+    fixedWidth: {
+      default: null,
+      type: String
     },
     flat: {
       default: false,
