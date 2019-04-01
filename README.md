@@ -108,8 +108,6 @@ You can clear the file input using a ref
 <button @click="$refs.button.clear()" />
 ```
 
-If you omit the title prop, the button with dynamically update the text with the name of the file or files you have selected.
-
 ## Props
 
 You can use the following props

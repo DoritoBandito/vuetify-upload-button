@@ -20,7 +20,7 @@
       <div class="v-btn__content" style="max-width: 100%">
         <slot name="icon-left" />
         <span>
-          {{ icon ? '' : noTitleUpdate ? title : uTitle }}
+          {{ icon ? '' : noTitleUpdate ? title : uTitle || title }}
         </span>
         <slot name="icon" />
       </div>
@@ -118,7 +118,7 @@ export default {
   },
   data() {
     return {
-      uTitle: 'Upload'
+      uTitle: null
     }
   },
   computed: {
@@ -166,7 +166,7 @@ export default {
             this.$emit('file-update', e.target.files)
           }
         } else {
-          this.uTitle = 'Upload'
+          this.uTitle = null
           this.$emit('file-update')
         }
       }
@@ -174,7 +174,7 @@ export default {
     clear() {
       document.getElementById(`${this._uid}uploadFile`).value = ''
       this.$emit('file-update')
-      this.uTitle = 'Upload'
+      this.uTitle = null
     }
   }
 }
