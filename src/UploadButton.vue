@@ -14,7 +14,8 @@
       v-if="ripple"
       :id="`label${id}`"
       :for="id"
-      :class="`v-btn ${classes}${color} upload-btn`"
+      :class="`v-btn ${classes}${colorClass} upload-btn`"
+      :style="colorStyle"
       v-ripple
     >
       <slot name="icon-left"></slot>
@@ -25,7 +26,8 @@
       v-else
       :id="`label${id}`"
       :for="id"
-      :class="`v-btn ${classes}${color} upload-btn`"
+      :class="`v-btn ${classes}${colorClass} upload-btn`"
+      :style="colorStyle"
     >
       <slot name="icon-left"></slot>
       {{ icon ? '' : title }}
@@ -134,9 +136,6 @@
           'v-btn--depressed': this.depressed
         }
 
-        if (this.flat)
-          this.color = ''
-
         let classString = ''
         for (let key in classes) {
           if (classes[key]) {
@@ -144,6 +143,23 @@
           }
         }
         return classString;
+      },
+      isCssColor () {
+        return !!this.color && !!this.color.match(/^(#|(rgb|hsl)a?\()/)
+      },
+      colorClass () {
+        if (!this.isCssColor && (this.outline || this.flat)) {
+          const [colorName, colorModifier] = this.color.toString().trim().split(' ', 2)
+          let colorClasses = `${colorName}--text`
+          if (colorModifier) colorClasses += `text--${colorModifier}`
+          return colorClasses
+        }
+        return this.color
+      },
+      colorStyle () {
+        if (this.isCssColor) {
+          return (this.outline || this.flat) ? { 'color': this.color, 'caret-color': this.color } : { 'background-color': this.color, 'border-color': this.color }
+        }
       }
     },
     methods: {
