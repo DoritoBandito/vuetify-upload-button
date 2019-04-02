@@ -25,7 +25,7 @@
       v-else
       :id="`label${id}`"
       :for="id"
-      :class="`v-btn ${classes}${color} upload-btn`"
+      :class="`v-btn ${classes}${colorClass} upload-btn`"
     >
       <slot name="icon-left"></slot>
       {{ icon ? '' : title }}
@@ -134,9 +134,6 @@
           'v-btn--depressed': this.depressed
         }
 
-        if (this.flat)
-          this.color = ''
-
         let classString = ''
         for (let key in classes) {
           if (classes[key]) {
@@ -144,6 +141,10 @@
           }
         }
         return classString;
+      },
+      colorClass () {
+        if (this.flat && this.color) return `${this.color}--text`
+        return this.color
       }
     },
     methods: {
