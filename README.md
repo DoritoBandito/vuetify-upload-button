@@ -61,11 +61,11 @@ Simple Upload button
 <upload-btn></upload-btn>
 ```
 
-Upon file change, the Upload Button component will use the callback function provided to the component, see the following example:
+Upon file change, the Upload Button component emit a file-update event with the file or files as the argument, see the following example:
 ```html
 <template>
   <upload-btn
-    :fileChangedCallback="fileChanged"
+    @file-update="update"
   >
 
   </upload-btn>
@@ -76,7 +76,7 @@ Upon file change, the Upload Button component will use the callback function pro
 
   export default {
     methods: {
-      fileChanged (file) {
+      update (file) {
         // handle file here. File will be an object.
         // If multiple prop is true, it will return an object array of files.
       }
@@ -119,6 +119,13 @@ Button as icon
 </upload-btn>
 ```
 
+You can clear the file input using a ref
+```html
+<upload-btn ref="button" title="Button" />
+
+<button @click="$refs.button.clear()" />
+```
+
 ## Props
 
 You can use the following props
@@ -128,14 +135,16 @@ You can use the following props
 | accept        | HTML input accept attribute | string | * |
 | block         | block         | bool  | false |
 | depressed     | remove box shadow | bool | false |
-| fileChangedCallback | callback for when a file is selected, returns a File object | function | undefined |
 | color | vuetify color, e.g. 'primary' | string | 'primary' |
 | disabled | sets disabled property for input/button | bool | false |
+| fixedWidth | sets a fixed width for the button | string | null |
 | flat | sets button flat | bool | false |
 | hover | button has hoverable effect | bool | true |
 | icon | button is icon button | bool | false |
+| labelClass | class to apply to the label such as text color | string | '' |
 | large | button is large | bool | false |
 | loading | loading state for button | bool | false |
+| maxWidth | allows the button to grow based on filename length to a max | string | 100% |
 | multiple | allows multiple files to be uploaded, returns an array instead of single object | bool | false |
 | name | applies HTML name attribute | string | uploadFile |
 | outline | button is outline | bool | false |
@@ -143,5 +152,7 @@ You can use the following props
 | round | button is round | bool | false |
 | small | button is small | bool | false |
 | title | text of button | string | 'Upload' |
-| uniqueId | use a unique id for the button for re-usability on same page | bool | false |
+| noTitleUpdate | disabled dynamic updating of title | bool | false |
+
+*Removed uniqueID as a prop because it should ALWAYS have a unique id
 

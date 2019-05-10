@@ -1,189 +1,207 @@
 <template>
   <div
     class="upload-btn"
-  > 
+  >
     <input
-      :id="id"
+      :id="`${_uid}uploadFile`"
       type="file"
       :name="name"
       :accept="accept"
-      v-on:change="fileChanged"
       :multiple="multiple"
-    />
-    <label
-      v-if="ripple"
-      :id="`label${id}`"
-      :for="id"
-      :class="`v-btn ${classes}${color} upload-btn`"
-      v-ripple
+      @change="fileChanged"
     >
-      <slot name="icon-left"></slot>
-      {{ icon ? '' : title }}
-      <slot name="icon"></slot>
-    </label>
     <label
-      v-else
-      :id="`label${id}`"
-      :for="id"
-      :class="`v-btn ${classes}${color} upload-btn`"
+      :id="`label${_uid + 'uploadFile'}`"
+      v-ripple="ripple"
+      :for="`${_uid}uploadFile`"
+      :class="`v-btn ${classes}${color} ${labelClass} upload-btn`"
+      :style="{ maxWidth, width: fixedWidth || 'auto' }"
     >
-      <slot name="icon-left"></slot>
-      {{ icon ? '' : title }}
-      <slot name="icon"></slot>
+      <div class="v-btn__content" style="max-width: 100%">
+        <slot name="icon-left" />
+        <span>
+          {{ icon ? '' : noTitleUpdate ? title : uTitle || title }}
+        </span>
+        <slot name="icon" />
+      </div>
     </label>
   </div>
 </template>
-
 <script>
-  export default {
-    name: 'upload-btn',
-    props: {
-      accept: {
-        default: '*',
-        type: String
-      },
-      block: {
-        default: false,
-        type: Boolean
-      },
-      depressed: {
-        default: false,
-        type: Boolean
-      },
-      fileChangedCallback: {
-        default: undefined,
-        type: Function
-      },
-      color: {
-        default: 'primary',
-        type: String
-      },
-      disabled: {
-        default: false,
-        type: Boolean
-      },
-      flat: {
-        default: false,
-        type: Boolean
-      },
-      hover: {
-        default: true,
-        type: Boolean
-      },
-      icon: {
-        default: false,
-        type: Boolean
-      },
-      large: {
-        default: false,
-        type: Boolean
-      },
-      loading: {
-        default: false,
-        type: Boolean
-      },
-      multiple: {
-        default: false,
-        type: Boolean
-      },
-      name: {
-        default: 'uploadFile',
-        type: String
-      },
-      outline: {
-        default: false,
-        type: Boolean
-      },
-      ripple: {
-        default: true,
-        type: Boolean
-      },
-      round: {
-        default: false,
-        type: Boolean
-      },
-      small: {
-        default: false,
-        type: Boolean
-      },
-      title: {
-        default: 'Upload',
-        type: String
-      },
-      uniqueId: {
-        default: false,
-        type: Boolean
-      }
+export default {
+  name: 'UploadBtn',
+  props: {
+    accept: {
+      default: '*',
+      type: String
     },
-    computed: {
-      id () {
-        return this.uniqueId ? `${this._uid}uploadFile` : 'uploadFile'
-      },
-      classes () {
-        const classes = {
-          'v-btn--block': this.block,
-          'v-btn--flat': this.flat,
-          'upload-btn-hover': this.hover,
-          'v-btn--icon': this.icon,
-          'v-btn--large': this.large,
-          'v-btn--loading': this.loading,
-          'v-btn--outline v-btn--depressed': this.outline,
-          'v-btn--round': this.round,
-          'v-btn--small': this.small,
-          'v-btn--disabled': this.disabled,
-          'v-btn--depressed': this.depressed
-        }
-
-        if (this.flat)
-          this.color = ''
-
-        let classString = ''
-        for (let key in classes) {
-          if (classes[key]) {
-            classString += `${key} `
-          }
-        }
-        return classString;
-      }
+    block: {
+      default: false,
+      type: Boolean
     },
-    methods: {
-      fileChanged (e) {
-        if (e) {
-          if (this.fileChangedCallback) {
-            if (e.target.files) {
-              if (!this.multiple && e.target.files[0]) {
-                this.fileChangedCallback(e.target.files[0]);
-              } else if (this.multiple) {
-                this.fileChangedCallback(e.target.files);
-              } else {
-                this.fileChangedCallback(null);
-              }
-            } else {
-              this.fileChangedCallback(null);
+    depressed: {
+      default: false,
+      type: Boolean
+    },
+    color: {
+      default: 'primary',
+      type: String
+    },
+    disabled: {
+      default: false,
+      type: Boolean
+    },
+    fixedWidth: {
+      default: null,
+      type: String
+    },
+    flat: {
+      default: false,
+      type: Boolean
+    },
+    hover: {
+      default: true,
+      type: Boolean
+    },
+    icon: {
+      default: false,
+      type: Boolean
+    },
+    labelClass: {
+      default: '',
+      type: String
+    },
+    large: {
+      default: false,
+      type: Boolean
+    },
+    loading: {
+      default: false,
+      type: Boolean
+    },
+    maxWidth: {
+      default: '100%',
+      type: String
+    },
+    multiple: {
+      default: false,
+      type: Boolean
+    },
+    name: {
+      default: 'uploadFile',
+      type: String
+    },
+    outline: {
+      default: false,
+      type: Boolean
+    },
+    ripple: {
+      default: true,
+      type: Boolean
+    },
+    round: {
+      default: false,
+      type: Boolean
+    },
+    small: {
+      default: false,
+      type: Boolean
+    },
+    title: {
+      default: 'Upload',
+      type: String
+    },
+    noTitleUpdate: {
+      default: false,
+      type: Boolean
+    }
+  },
+  data() {
+    return {
+      uTitle: null
+    }
+  },
+  computed: {
+    classes() {
+      const classes = {
+        'v-btn--block': this.block,
+        'v-btn--flat': this.flat,
+        'upload-btn-hover': this.hover,
+        'v-btn--icon': this.icon,
+        'v-btn--large': this.large,
+        'v-btn--loading': this.loading,
+        'v-btn--outline v-btn--depressed': this.outline,
+        'v-btn--round': this.round,
+        'v-btn--small': this.small,
+        'v-btn--disabled': this.disabled,
+        'v-btn--depressed': this.depressed
+      }
+
+      // eslint-disable-next-line
+      if (this.flat) this.color = ''
+
+      let classString = ''
+      for (const key in classes) {
+        if (classes[key]) {
+          classString += `${key} `
+        }
+      }
+      return classString
+    }
+  },
+  methods: {
+    fileChanged(e) {
+      if (e) {
+        if (e.target.files.length > 0) {
+          if (!this.multiple) {
+            this.uTitle = e.target.files[0].name
+            this.$emit('file-update', e.target.files[0])
+          } else {
+            let title = ''
+            for (let i = 0; i < e.target.files.length; i++) {
+              title += e.target.files[i].name + ', '
             }
+            title = title.slice(0, title.length - 2)
+            this.uTitle = title
+            this.$emit('file-update', e.target.files)
           }
+        } else {
+          this.uTitle = null
+          this.$emit('file-update')
         }
       }
+    },
+    clear() {
+      document.getElementById(`${this._uid}uploadFile`).value = ''
+      this.$emit('file-update')
+      this.uTitle = null
     }
   }
+}
 </script>
 
 <style scoped>
-  .upload-btn {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+.upload-btn {
+  padding-left: 16px;
+  padding-right: 16px;
+}
 
-  .upload-btn input[type=file] {
-    position: absolute;
-    height: 0.1px;
-    width: 0.1px;
-    overflow: hidden;
-    opacity: 0;
-    z-index: -1;
-  }
+.upload-btn input[type='file'] {
+  position: absolute;
+  height: 0.1px;
+  width: 0.1px;
+  overflow: hidden;
+  opacity: 0;
+  z-index: -1;
+}
 
-  .upload-btn-hover {
-    cursor: pointer;
-  }
+.upload-btn > .v-btn__content > span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.upload-btn-hover {
+  cursor: pointer;
+}
 </style>
