@@ -3,6 +3,7 @@
     class="upload-btn"
   >
     <input
+      :id="`${_uid}uploadFile`"
       ref="uploadFile"
       type="file"
       :name="name"
