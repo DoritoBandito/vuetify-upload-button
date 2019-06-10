@@ -4,6 +4,7 @@
   >
     <input
       :id="`${_uid}uploadFile`"
+      ref="uploadFile"
       type="file"
       :name="name"
       :accept="accept"
@@ -172,7 +173,7 @@ export default {
       }
     },
     clear() {
-      document.getElementById(`${this._uid}uploadFile`).value = ''
+      this.$refs.uploadFile.value = ''
       this.$emit('file-update')
       this.uTitle = null
     }
