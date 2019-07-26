@@ -1,3 +1,8 @@
+# IMPORTANT NOTE
+### This package is no longer maintained as of the release of Vuetify 2.0.0. Vuetify 2 now includes it's own file upload component found here: https://vuetifyjs.com/en/components/file-inputs
+
+### This package will still work with Vuetify version 1.x.x and will continue to be available on NPM.
+
 # vuetify-upload-button
 
 A Vue component for Vuetify.
